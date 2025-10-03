@@ -29,23 +29,36 @@ const hasNumberMessage = `
 ● The password must contain at least one number.`;
 const hasUpperMessage = `
 ● The password must contain at least one uppercase letter.`;
-let isEightChar = false;
-let hasUpper = false;
-let hasNumber = false;
+
+let hasEightChar;
+let hasUpper;
+let hasNumber;
 
 do {
+  hasEightChar = false;
+  hasUpper = false;
+  hasNumber = false;
+
   let userPassword = readline.question("Please enter a password: ");
 
-  if (userPassword.length >= 8) {
+  if (userPassword.length < 8) {
+    hasEightChar;
+    console.log(
+      message + isEightCharMessage + hasNumberMessage + hasUpperMessage
+    );
+  } else {
+    hasEightChar = true;
+
     for (let char of userPassword)
-      if (char >= "A" && char <= "Z") {
+      if (
+        char === char.toUpperCase() &&
+        char.toLowerCase() !== char.toUpperCase()
+      ) {
         hasUpper = true;
-      } else if (char >= "0" && char <= "9") {
+      } else if (Number.isFinite(Number(char))) {
         hasNumber = true;
-      } else {
-        hasNumber = false;
-        hasUpper = false;
       }
+
     if (!hasNumber && hasUpper) {
       console.log(message + hasNumberMessage);
     } else if (hasNumber && !hasUpper) {
@@ -53,13 +66,8 @@ do {
     } else {
       console.log(message + hasNumberMessage + hasUpperMessage);
     }
-  } else {
-    isEightChar = false;
-    console.log(
-      message + isEightCharMessage + hasNumberMessage + hasUpperMessage
-    );
   }
-  // console.log(isEightChar, hasUpper, hasNumber);
-} while (!(isEightChar && hasUpper && hasNumber));
+  // console.log(hasEightChar, hasUpper, hasNumber); //USE TO VERIFY THE BOOLEAN STATE
+} while (!(hasEightChar && hasUpper && hasNumber));
 
 console.log("WELCOME!!! Password is successfuly entered");
