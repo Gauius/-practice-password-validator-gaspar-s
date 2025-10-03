@@ -63,8 +63,6 @@ do {
       console.log(message + hasNumberMessage);
     } else if (hasNumber && !hasUpper) {
       console.log(message + hasUpperMessage);
-    } else {
-      console.log(message + hasNumberMessage + hasUpperMessage);
     }
   }
   // console.log(hasEightChar, hasUpper, hasNumber); //USE TO VERIFY THE BOOLEAN STATE
